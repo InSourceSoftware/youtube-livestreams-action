@@ -28,7 +28,7 @@ function main() {
 
   console.log('Fetching videos...');
   try {
-    fetchVideos(apiKey, channelId, thumbnailSize, outputPath, outputFilenameTemplate, outputContentTemplate)
+    fetchVideos(apiKey, channelId, maxResults, thumbnailSize, outputPath, outputFilenameTemplate, outputContentTemplate)
       .then(() => console.log('finished'));
   } catch (error) {
     console.error(error);
