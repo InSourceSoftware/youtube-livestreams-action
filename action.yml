@@ -1,0 +1,45 @@
+name: 'YouTube Livestreams Action'
+description: 'Sync YouTube videos into a website as files or posts.'
+inputs:
+  api-key:
+    description: 'Google data api key with access to YouTube Data API v3'
+    required: true
+  channel-id:
+    description: 'YouTube channel id'
+    required: true
+  max-results:
+    description: 'Max number of results to return, defaults to 5'
+    required: false
+    default: '5'
+  thumbnail-size:
+    description: 'Thumbnail image size name, one of default, medium, high, standard, maxres'
+    required: false
+    default: 'default'
+  output-path:
+    description: 'Path to write output files to, defaults to _data/streams'
+    required: false
+    default: '_data/streams'
+  output-filename-template:
+    description: 'Output filename template for each output file including placeholders, defaults to ${position}.yml'
+    required: false
+    default: '${publishedAt}.yml'
+  output-content-template:
+    description: 'Output content template for each output file including placeholders'
+    required: false
+    default: |
+      _id: '${id}'
+      etag: '${etag}'
+      title: '${title}'
+      description: '${description}'
+      thumbnailUrl: '${thumbnailUrl}'
+      channelId: '${channelId}'
+      channelTitle: '${channelTitle}'
+      videoId: '${videoId}'
+      publishedAt: '${publishedAt}'
+      publishTime: '${publishTime}'
+      duration: '${duration}'
+      actualStartTime: '${actualStartTime}'
+      actualEndTime: '${actualEndTime}'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
