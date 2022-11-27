@@ -46,12 +46,14 @@ async function fetchVideos(apiKey, channelId, maxResults, thumbnailSize, outputP
 
   for (let index in items) {
     const item = items[index];
-    const details = videoDetails.items.find(video => video.id === item.id);
+    const details = videoDetails.items.find(video => video.id === item.id.videoId);
     // Copy over additional or richer details
     if (details !== undefined) {
       item.snippet.thumbnails = details.snippet.thumbnails;
       item.contentDetails = details.contentDetails;
       item.liveStreamingDetails = details.liveStreamingDetails;
+    } else {
+      console.log(`details not found for ${item.id}`);
     }
     const filename = template(outputFilenameTemplate, item, thumbnailSize);
     const content = template(outputContentTemplate, item, thumbnailSize);
