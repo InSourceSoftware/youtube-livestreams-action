@@ -42457,7 +42457,22 @@ const fs = __nccwpck_require__(7147);
 
 const YOUTUBE_URL = 'https://youtube.googleapis.com';
 
-main();
+// main();
+
+fetchVideos(process.env.API_KEY, process.env.CHANNEL_ID, '10', 'standard', '_data/test', '${publishedAt}.yml', '_id: \'${id}\'\n'
+  + 'etag: \'${etag}\'\n'
+  + 'title: \'${title}\'\n'
+  + 'description: \'${description}\'\n'
+  + 'thumbnailUrl: \'${thumbnailUrl}\'\n'
+  + 'channelId: \'${channelId}\'\n'
+  + 'channelTitle: \'${channelTitle}\'\n'
+  + 'videoId: \'${videoId}\'\n'
+  + 'publishedAt: \'${publishedAt}\'\n'
+  + 'publishTime: \'${publishTime}\'\n'
+  + 'duration: \'${duration}\'\n'
+  + 'actualStartTime: \'${actualStartTime}\'\n'
+  + 'actualEndTime: \'${actualEndTime}\'')
+    .then(() => console.log('finished'));
 
 function main() {
   const apiKey = core.getInput('api-key');
@@ -42498,12 +42513,14 @@ async function fetchVideos(apiKey, channelId, maxResults, thumbnailSize, outputP
 
   for (let index in items) {
     const item = items[index];
-    const details = videoDetails.items.find(video => video.id === item.id);
+    const details = videoDetails.items.find(video => video.id === item.id.videoId);
     // Copy over additional or richer details
     if (details !== undefined) {
       item.snippet.thumbnails = details.snippet.thumbnails;
       item.contentDetails = details.contentDetails;
       item.liveStreamingDetails = details.liveStreamingDetails;
+    } else {
+      console.log(`details not found for ${item.id}`);
     }
     const filename = template(outputFilenameTemplate, item, thumbnailSize);
     const content = template(outputContentTemplate, item, thumbnailSize);
