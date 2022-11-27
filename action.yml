@@ -1,5 +1,5 @@
 name: 'YouTube Livestreams Action'
-description: 'Sync YouTube videos into a website as files or posts.'
+description: 'Sync YouTube livestreams into a website as files or posts.'
 inputs:
   api-key:
     description: 'Google data api key with access to YouTube Data API v3'
