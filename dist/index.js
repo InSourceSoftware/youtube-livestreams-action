@@ -42457,22 +42457,7 @@ const fs = __nccwpck_require__(7147);
 
 const YOUTUBE_URL = 'https://youtube.googleapis.com';
 
-// main();
-
-fetchVideos(process.env.API_KEY, process.env.CHANNEL_ID, '10', 'standard', '_data/test', '${publishedAt}.yml', '_id: \'${id}\'\n'
-  + 'etag: \'${etag}\'\n'
-  + 'title: \'${title}\'\n'
-  + 'description: \'${description}\'\n'
-  + 'thumbnailUrl: \'${thumbnailUrl}\'\n'
-  + 'channelId: \'${channelId}\'\n'
-  + 'channelTitle: \'${channelTitle}\'\n'
-  + 'videoId: \'${videoId}\'\n'
-  + 'publishedAt: \'${publishedAt}\'\n'
-  + 'publishTime: \'${publishTime}\'\n'
-  + 'duration: \'${duration}\'\n'
-  + 'actualStartTime: \'${actualStartTime}\'\n'
-  + 'actualEndTime: \'${actualEndTime}\'')
-    .then(() => console.log('finished'));
+main();
 
 function main() {
   const apiKey = core.getInput('api-key');
@@ -42495,7 +42480,7 @@ function main() {
 
   console.log('Fetching videos...');
   try {
-    fetchVideos(apiKey, channelId, thumbnailSize, outputPath, outputFilenameTemplate, outputContentTemplate)
+    fetchVideos(apiKey, channelId, maxResults, thumbnailSize, outputPath, outputFilenameTemplate, outputContentTemplate)
       .then(() => console.log('finished'));
   } catch (error) {
     console.error(error);
