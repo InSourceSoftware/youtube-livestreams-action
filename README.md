@@ -1,6 +1,6 @@
-# YouTube Videos Action
+# YouTube Livestreams Action
 
-Fetch YouTube videos from a YouTube channel (by channel id) and create files or
+Fetch YouTube livestreams from a YouTube channel (by channel id) and create files or
 posts on a website.
 
 ## Inputs
@@ -53,7 +53,7 @@ actualEndTime: '${actualEndTime}'
 ```
 
 [1]: Placeholders currently include the following fields from the YouTube
-playlist response:
+search and video details responses:
 
 * `${id}`
 * `${etag}`
@@ -76,9 +76,10 @@ uses: InSourceSoftware/youtube-livestreams-action@v1
 with:
   api-key: ${{ secrets.GOOGLE_API_KEY }}
   channel-id: 'xyz'
+  max-results: '5'
   thumbnail-size: 'standard'
-  output-path: '_data/videos'
-  output-filename-template: '${position}.yml'
+  output-path: '_data/streams'
+  output-filename-template: '${publishedAt}.yml'
   output-content-template: |
     _id: '${id}'
     etag: '${etag}'
@@ -87,10 +88,10 @@ with:
     thumbnailUrl: '${thumbnailUrl}'
     channelId: '${channelId}'
     channelTitle: '${channelTitle}'
-    playlistId: '${playlistId}'
-    position: '${position}'
-    videoOwnerChannelTitle: '${videoOwnerChannelTitle}'
-    videoOwnerChannelId: '${videoOwnerChannelId}'
     videoId: '${videoId}'
     publishedAt: '${publishedAt}'
+    publishTime: '${publishTime}'
+    duration: '${duration}'
+    actualStartTime: '${actualStartTime}'
+    actualEndTime: '${actualEndTime}'
 ```
